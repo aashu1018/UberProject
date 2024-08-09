@@ -1,13 +1,22 @@
 package com.project.uber.uberApp.strategies.impl;
 
-import com.project.uber.uberApp.dto.RideRequestDTO;
-import com.project.uber.uberApp.strategies.RideFarceCalculationStrategy;
+import com.project.uber.uberApp.entities.RideRequest;
+import com.project.uber.uberApp.services.DistanceService;
+import com.project.uber.uberApp.strategies.RideFareCalculationStrategy;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RideFareSurgePricingFareCalculationStrategy implements RideFarceCalculationStrategy {
+@RequiredArgsConstructor
+public class RideFareSurgePricingFareCalculationStrategy implements RideFareCalculationStrategy {
+
+    private final DistanceService distanceService;
+    private static final double SURGE_FACTOR = 2;
+
     @Override
-    public double calculateFare(RideRequestDTO rideRequestDTO) {
-        return 0;
+    public double calculateFare(RideRequest rideRequest) {
+        double distance = distanceService.calculateDistance(rideRequest.getPickupLocation(),
+                rideRequest.getDropLocation());
+        return distance*RIDE_FARE_MULTIPLIER*SURGE_FACTOR;
     }
 }
