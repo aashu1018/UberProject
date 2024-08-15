@@ -1,6 +1,5 @@
 package com.project.uber.uberApp.repositories;
 
-import com.project.uber.uberApp.dto.RatingDTO;
 import com.project.uber.uberApp.entities.Driver;
 import com.project.uber.uberApp.entities.Rating;
 import com.project.uber.uberApp.entities.Ride;
